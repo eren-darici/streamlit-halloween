@@ -4,7 +4,6 @@ import requests
 # Streamlit app layout
 st.title("Halloween Costume Generator")
 
-
 # Main features
 st.sidebar.header("Select costume specs")
 
@@ -22,9 +21,20 @@ budget_label = st.sidebar.selectbox("Select your budget:", budget_levels)
 gender_options = ["Male", "Female", "Non-Binary"]
 selected_gender = st.sidebar.multiselect("Select your gender:", gender_options)
 
-## Height (selectbox from 4' to 7')
-height_options = []
-selected_height = st.sidebar.selectbox("Select your height:", height_options)
+## Height
+### Height selectbox
+st.sidebar.subheader("Select your height:")
+
+### Selectbox for feet
+height_feet_options = list(range(4, 8))
+selected_height_feet = st.sidebar.selectbox("Feet:", height_feet_options)
+
+### Selectbox for inches
+height_inches_options = list(range(0, 12))
+selected_height_inches = st.sidebar.selectbox("Inches:", height_inches_options)
+
+### Combine feet and inches
+selected_height = f"{selected_height_feet}'{selected_height_inches}''"
 
 ## Weight
 weight = st.sidebar.number_input("Enter your weight (lbs):", min_value=0, value=150, step=1, max_value=500)
