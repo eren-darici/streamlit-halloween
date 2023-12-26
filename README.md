@@ -1,1 +1,1 @@
-# streamlit-halloween
+# Streamlit Halloween App
