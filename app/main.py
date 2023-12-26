@@ -13,7 +13,7 @@ medium = st.sidebar.multiselect("Select your favorite medium:", medium_list)
 
 # Budget selectbox with labels
 budget_levels = ["Low", "Medium", "High"]
-budget_label = st.sidebar.selectbox("Select your budget:", budget_levels)
+budget = st.sidebar.selectbox("Select your budget:", budget_levels)
 
 
 # Add personal info
@@ -44,3 +44,12 @@ st.sidebar.header("Extras")
 
 ### Glasses yes/no
 glasses = st.sidebar.selectbox("Do you wear glasses?", ("Yes", "No"))
+
+params = {
+    "medium": medium,
+    "budget": budget,
+    "gender": selected_gender,
+    "height": selected_height,
+    "weight": weight,
+    "glasses": glasses,
+}
