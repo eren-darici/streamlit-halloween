@@ -27,8 +27,8 @@ class MyOpenAIClient():
         if params['glasses'] == "Yes":
             extras += f"I also wear glasses. "
         
-        if params['race']:
-            extras += f"I'm {params['race']} {params['gender']}. "
+        if params['ethnicity']:
+            extras += f"I'm {params['ethnicity']} {params['gender']}. "
 
         if params['hair_length']:
             extras += f"My hairs are {params['hair_length']}"
