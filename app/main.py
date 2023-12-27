@@ -1,6 +1,10 @@
 import streamlit as st
 from openai_client import MyOpenAIClient
 import json
+import os
+from dotenv import load_dotenv
+
+CAN_GENERATE_IMAGE = os.getenv('IMAGE')
 
 # Streamlit app layout
 st.title("Halloween Costume Generator")
@@ -76,9 +80,10 @@ if st.sidebar.button("Generate Costume"):
             for idea in ideas_json:
                 st.write(f"## {idea['costume']}")
 
-                # Display the costume image
-                image_url = client.generate_costume_image(prompt=idea['dalle_prompt'])
-                st.image(image_url, caption="Costume Image", use_column_width=True)
+                if CAN_GENERATE_IMAGE:
+                    # Display the costume image
+                    image_url = client.generate_costume_image(prompt=idea['dalle_prompt'])
+                    st.image(image_url, caption="Costume Image", use_column_width=True)
 
 
                 for prop in idea['props']:
