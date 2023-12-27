@@ -31,12 +31,12 @@ def show_extras(options):
     else:
         hair_length = None
     
-    # Race (optional)
-    if not options['selectboxes']['race'].get('is_optional') or st.sidebar.checkbox("Include Race"):
-        race = st.sidebar.selectbox(options['selectboxes']['race']['label'],
-                                     options['selectboxes']['race']['options'],
-                                     help=options['selectboxes']['race']['help'])
+    # Ethnicity (optional)
+    if not options['selectboxes']['ethnicity'].get('is_optional') or st.sidebar.checkbox("Include Ethnicity"):
+        ethnicity = st.sidebar.selectbox(options['selectboxes']['ethnicity']['label'],
+                                     options['selectboxes']['ethnicity']['options'],
+                                     help=options['selectboxes']['ethnicity']['help'])
     else:
-        race = None
+        ethnicity = None
     
-    return glasses, hair_length, race
+    return age, glasses, hair_length, ethnicity
