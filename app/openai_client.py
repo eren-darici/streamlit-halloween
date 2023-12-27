@@ -75,7 +75,7 @@ class MyOpenAIClient():
     def generate_costume_image(self, prompt):
         # Create response
         response = self.client.images.generate(
-            model="dall-e-2",
+            model="dall-e-3",
             prompt=prompt,
             size="1024x1024",
             quality="standard",
