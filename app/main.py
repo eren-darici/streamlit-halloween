@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 CAN_GENERATE_IMAGE = os.getenv('IMAGE')
 
 # Load options from JSON file
-with open('sidebar.json', 'r') as json_file:
+with open('./data/sidebar.json', 'r') as json_file:
     options = json.load(json_file)
 
 # Streamlit app layout
