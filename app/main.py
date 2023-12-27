@@ -12,9 +12,6 @@ CAN_GENERATE_IMAGE = os.getenv('IMAGE')
 with open('./data/sidebar.json', 'r') as json_file:
     options = json.load(json_file)
 
-# Logging values for debugging
-st.write(f"Loaded options: {options}")
-
 # Streamlit app layout
 st.title(options['headers']['main'])
 
@@ -22,14 +19,10 @@ st.title(options['headers']['main'])
 st.sidebar.header(options['headers']['specs'])
 
 # Show costume specifications
-try:
-    medium, budget, selected_gender, selected_height, weight, glasses = show_costume_specs(options)
-    st.write(f"Values after show_costume_specs: medium={medium}, budget={budget}, ...")
-except Exception as e:
-    st.error(f"Error in show_costume_specs: {e}")
+medium, budget, selected_gender, selected_height, weight = show_costume_specs(options)
 
 # Show extras
-show_extras(options)
+glasses = show_extras(options)
 
 # Button to generate costume
 if st.sidebar.button(options['button']['generate_costume']):

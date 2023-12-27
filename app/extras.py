@@ -8,3 +8,5 @@ def show_extras(options):
     glasses = st.sidebar.selectbox(options['selectbox']['glasses']['label'],
                                    options['selectbox']['glasses']['options'],
                                    help=options['selectbox']['glasses']['help'])
+    
+    return glasses
