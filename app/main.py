@@ -1,5 +1,7 @@
 import streamlit as st
 from openai_client import MyOpenAIClient
+from costume_specs import show_costume_specs
+from extras import show_extras
 import json
 import os
 from dotenv import load_dotenv
@@ -16,54 +18,11 @@ st.title(options['headers']['main'])
 # Main features
 st.sidebar.header(options['headers']['specs'])
 
-# Select medium(s)
-medium = st.sidebar.multiselect(options['multiselects']['medium']['label'],
-                                options['multiselects']['medium']['options'],
-                                help=options['multiselects']['medium']['help'])
+# Show costume specifications
+medium, budget, selected_gender, selected_height, weight, glasses = show_costume_specs(options)
 
-# Budget selectbox with labels
-budget = st.sidebar.selectbox(options['selectboxes']['budget']['label'],
-                              options['selectboxes']['budget']['options'],
-                              help=options['selectboxes']['budget']['help'])
-
-# Add personal info
-## Gender multiselect
-selected_gender = st.sidebar.multiselect(options['multiselects']['gender']['label'],
-                                         options['multiselects']['gender']['options'],
-                                         help=options['multiselects']['gender']['help'])
-
-## Height
-### Height selectbox
-st.sidebar.subheader(options['headers']['height'])
-
-### Selectbox for feet
-selected_height_feet = st.sidebar.selectbox("Feet:",
-                                           options['selectboxes']['height_feet']['options'],
-                                           help=options['selectboxes']['height_feet']['help'])
-
-### Selectbox for inches
-selected_height_inches = st.sidebar.selectbox("Inches:",
-                                              options['selectboxes']['height_inches']['options'],
-                                              help=options['selectboxes']['height_inches']['help'])
-
-### Combine feet and inches
-selected_height = f"{selected_height_feet}'{selected_height_inches}''"
-
-## Weight
-weight = st.sidebar.number_input(options['number_input']['weight']['label'],
-                                 min_value=options['number_input']['weight']['min_value'],
-                                 value=options['number_input']['weight']['value'],
-                                 step=options['number_input']['weight']['step'],
-                                 max_value=options['number_input']['weight']['max_value'],
-                                 help=options['number_input']['weight']['help'])
-
-## Extras
-st.sidebar.header(options['headers']['extras'])
-
-### Glasses yes/no
-glasses = st.sidebar.selectbox(options['selectbox']['glasses']['label'],
-                               options['selectbox']['glasses']['options'],
-                               help=options['selectbox']['glasses']['help'])
+# Show extras
+show_extras(options)
 
 # Button to generate costume
 if st.sidebar.button(options['button']['generate_costume']):
@@ -85,7 +44,7 @@ if st.sidebar.button(options['button']['generate_costume']):
         client = MyOpenAIClient()
         ideas = client.generate_costume_idea(params=params).strip('"').strip()
         print(ideas)
-        
+
         try:
             # Try to parse ideas as JSON
             ideas_json = json.loads(ideas)
