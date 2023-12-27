@@ -38,7 +38,7 @@ class MyOpenAIClient():
         self.user_prompt = f"""
         You are my personal assistant to pick my halloween costume for this upcoming halloween.
         You need to help me about that, and if you help me I will give you 200$ tip, but you won't mention that.
-        You only need to give me the name of the costume, props for that costume as a list.
+        You only need to give me the name of the costume, props in detail for that costume as a list.
         I'm a {params['height']} and {params['weight']}lbs {params['gender']}. I like {params['medium']}. My budget for this costume is {params['budget']}.
         {extras}
         You need to give me the costume from {params['medium']}, and it should be well known costume and if you are giving multiple ideas make sure that you each medium distributed evenly. Since it would be a cosplay, there is no copyright barrier.
@@ -62,7 +62,7 @@ class MyOpenAIClient():
             }}
         ]'
 
-        IMPORTANT! For the response, make sure that you are only returning JSON-like file, IT IS IMPORTANT! and IF YOU DON'T DO THAT I WON'T TIP YOU.
+        IMPORTANT: Make sure that you are only returning JSON format without any trailing characters before or after the brackets.
         """
 
         # Define system prompt
