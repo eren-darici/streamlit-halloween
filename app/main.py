@@ -6,51 +6,67 @@ from dotenv import load_dotenv
 
 CAN_GENERATE_IMAGE = os.getenv('IMAGE')
 
+# Load options from JSON file
+with open('sidebar.json', 'r') as json_file:
+    options = json.load(json_file)
+
 # Streamlit app layout
-st.title("Halloween Costume Generator")
+st.title(options['headers']['main'])
 
 # Main features
-st.sidebar.header("Select costume specs")
+st.sidebar.header(options['headers']['specs'])
 
 # Select medium(s)
-medium_list = ["TV", "Comics", "Movies", "Music", "Anime", "Manga"]
-medium = st.sidebar.multiselect("Select your favorite medium:", medium_list, help="Select at least one medium.")
+medium = st.sidebar.multiselect(options['multiselects']['medium']['label'],
+                                options['multiselects']['medium']['options'],
+                                help=options['multiselects']['medium']['help'])
 
 # Budget selectbox with labels
-budget_levels = ["Low", "Medium", "High"]
-budget = st.sidebar.selectbox("Select your budget:", budget_levels, help="Select a budget level.")
+budget = st.sidebar.selectbox(options['selectboxes']['budget']['label'],
+                              options['selectboxes']['budget']['options'],
+                              help=options['selectboxes']['budget']['help'])
 
 # Add personal info
 ## Gender multiselect
-gender_options = ["Male", "Female", "Non-Binary"]
-selected_gender = st.sidebar.multiselect("Select your gender:", gender_options, help="Select at least one gender.")
+selected_gender = st.sidebar.multiselect(options['multiselects']['gender']['label'],
+                                         options['multiselects']['gender']['options'],
+                                         help=options['multiselects']['gender']['help'])
 
 ## Height
 ### Height selectbox
-st.sidebar.subheader("Select your height:")
+st.sidebar.subheader(options['headers']['height'])
 
 ### Selectbox for feet
-height_feet_options = list(range(4, 8))
-selected_height_feet = st.sidebar.selectbox("Feet:", height_feet_options, help="Select your height in feet.")
+selected_height_feet = st.sidebar.selectbox("Feet:",
+                                           options['selectboxes']['height_feet']['options'],
+                                           help=options['selectboxes']['height_feet']['help'])
 
 ### Selectbox for inches
-height_inches_options = list(range(0, 12))
-selected_height_inches = st.sidebar.selectbox("Inches:", height_inches_options, help="Select your height in inches.")
+selected_height_inches = st.sidebar.selectbox("Inches:",
+                                              options['selectboxes']['height_inches']['options'],
+                                              help=options['selectboxes']['height_inches']['help'])
 
 ### Combine feet and inches
 selected_height = f"{selected_height_feet}'{selected_height_inches}''"
 
 ## Weight
-weight = st.sidebar.number_input("Enter your weight (lbs):", min_value=0, value=150, step=1, max_value=500, help="Enter your weight in pounds.")
+weight = st.sidebar.number_input(options['number_input']['weight']['label'],
+                                 min_value=options['number_input']['weight']['min_value'],
+                                 value=options['number_input']['weight']['value'],
+                                 step=options['number_input']['weight']['step'],
+                                 max_value=options['number_input']['weight']['max_value'],
+                                 help=options['number_input']['weight']['help'])
 
 ## Extras
-st.sidebar.header("Extras")
+st.sidebar.header(options['headers']['extras'])
 
 ### Glasses yes/no
-glasses = st.sidebar.selectbox("Do you wear glasses?", ("Yes", "No"), help="Select whether you wear glasses or not.")
+glasses = st.sidebar.selectbox(options['selectbox']['glasses']['label'],
+                               options['selectbox']['glasses']['options'],
+                               help=options['selectbox']['glasses']['help'])
 
 # Button to generate costume
-if st.sidebar.button("Generate Costume"):
+if st.sidebar.button(options['button']['generate_costume']):
     # Validate that mandatory fields are selected
     if not medium or not budget or not selected_gender:
         st.sidebar.warning("Please fill in all mandatory fields.")
@@ -84,7 +100,6 @@ if st.sidebar.button("Generate Costume"):
                     # Display the costume image
                     image_url = client.generate_costume_image(prompt=idea['dalle_prompt'])
                     st.image(image_url, caption="Costume Image", use_column_width=True)
-
 
                 for prop in idea['props']:
                     st.write(f"   - {prop}")

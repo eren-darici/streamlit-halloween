@@ -1,0 +1,58 @@
+{
+    "multiselects": {
+      "medium": {
+        "label": "Select your favorite medium:",
+        "options": ["TV", "Comics", "Movies", "Music", "Anime", "Manga"],
+        "help": "Select at least one medium."
+      },
+      "gender": {
+        "label": "Select your gender:",
+        "options": ["Male", "Female", "Non-Binary"],
+        "help": "Select at least one gender."
+      }
+    },
+    "selectboxes": {
+      "budget": {
+        "label": "Select your budget:",
+        "options": ["Low", "Medium", "High"],
+        "help": "Select a budget level."
+      },
+      "height_feet": {
+        "label": "Feet:",
+        "options": [4, 5, 6, 7],
+        "help": "Select your height in feet."
+      },
+      "height_inches": {
+        "label": "Inches:",
+        "options": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "help": "Select your height in inches."
+      }
+    },
+    "number_input": {
+      "weight": {
+        "label": "Enter your weight (lbs):",
+        "min_value": 0,
+        "value": 150,
+        "step": 1,
+        "max_value": 500,
+        "help": "Enter your weight in pounds."
+      }
+    },
+    "selectbox": {
+      "glasses": {
+        "label": "Do you wear glasses?",
+        "options": ["Yes", "No"],
+        "help": "Select whether you wear glasses or not."
+      }
+    },
+    "headers": {
+      "main": "Halloween Costume Generator",
+      "specs": "Select costume specs",
+      "height": "Select your height:",
+      "extras": "Extras"
+    },
+    "button": {
+      "generate_costume": "Generate Costume"
+    }
+  }
+  
