@@ -78,7 +78,7 @@ class MyOpenAIClient():
             model="dall-e-2",
             prompt=prompt,
             size="1024x1024",
-            quality="low",
+            quality="standard",
             n=1,
         )
 
