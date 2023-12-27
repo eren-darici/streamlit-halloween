@@ -6,6 +6,7 @@ import json
 import os
 from dotenv import load_dotenv
 from streamlit_extras.buy_me_a_coffee import button as bmc
+from db import insert_image, check_cache
 
 load_dotenv()
 
@@ -66,8 +67,15 @@ if st.sidebar.button(options['button']['generate_costume']):
                 st.write(f"## {idea['costume']}")
 
                 if CAN_GENERATE_IMAGE == "YES":
-                    # Display the costume image
-                    image_url = client.generate_costume_image(prompt=idea['dalle_prompt'])
+                    # First check cache
+                    result, match = check_cache(new_prompt=idea['dalle_prompt'], costume_name=idea['costume'])
+                    if result:
+                        image_url = match.get('image_url')
+                    else:
+                        # Display the costume image
+                        image_url = client.generate_costume_image(prompt=idea['dalle_prompt'])
+                        insert_image(prompt=idea['dalle_prompt'], image_url=image_url, costume_name=idea['costume'])
+                        
                     st.image(image_url, caption="Costume Image", use_column_width=True)
 
                 for prop in idea['props']:

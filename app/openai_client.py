@@ -15,6 +15,27 @@ class MyOpenAIClient():
 
         # Create client
         self.client = openai.OpenAI(api_key=self.OPENAI_API_KEY)
+
+    def __validate_json(self, json):
+        # Define conversation
+        conversation = [
+            {"role": "user", "content": f"""You are my assistant at work. You are highly skilled in maintaining data integrity in JSON format. 
+             Your job is to make sure that everything is in valid JSON format. 
+             If it's not, turn into a valid JSON format. If it is valid, return input data itself, if it is not valid, correct the format and return correct data.
+             Here is the data {json}"""},
+            {"role": "system", "content": "Sure, here is your results."}
+        ]
+
+        # Create response
+        response = self.client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=conversation
+        )
+
+        # Get message
+        message = response.choices[0].message.content
+
+        return message
         
 
     def generate_costume_idea(self, params):
@@ -46,7 +67,7 @@ class MyOpenAIClient():
         in a list, for each costume:
             costume: costume name (string)
             props: list of props
-            dalle_prompt: a prompt for Dall-e, that contains both character and my specifications and include props.
+            dalle_prompt: a prompt for Dall-e, that contains both character and my specifications (include age and ethnicity -if specified- in the prompt) and include props. Style should be something between comic and realistic.
 
         example output:
         '[
@@ -83,6 +104,9 @@ class MyOpenAIClient():
         # Get message
         message = response.choices[0].message.content
 
+        # Validate
+        message = self.__validate_json(message)
+
         return message
 
     def generate_costume_image(self, prompt):
@@ -100,4 +124,21 @@ class MyOpenAIClient():
         print(prompt)
 
         return image_url
+    
+    def check_cache(self, new_prompt, cached_prompt):
+        # Define conversation
+        conversation = [
+            {"role": "user", "content": f"Does new prompt similar to old prompt, key things to check are age, ethnicity, sex and looks of the costume. just say True or False.\nNew Prompt: {new_prompt}\nOld Prompt: {cached_prompt}"},
+            {"role": "system", "content": "Sure, here is my answer. "}
+        ]
         
+         # Create response
+        response = self.client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=conversation
+        )
+
+        # Get message
+        message = response.choices[0].message.content
+
+        return message
