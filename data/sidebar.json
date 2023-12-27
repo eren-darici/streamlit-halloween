@@ -14,7 +14,7 @@
     "selectboxes": {
       "budget": {
         "label": "Select your budget:",
-        "options": ["Low", "Medium", "High"],
+        "options": ["<15$", "15$-30$", ">30$"],
         "help": "Select a budget level."
       },
       "height_feet": {
@@ -26,6 +26,24 @@
         "label": "Inches:",
         "options": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
         "help": "Select your height in inches."
+      },
+      "glasses": {
+        "label": "Do you wear glasses?",
+        "options": ["Yes", "No"],
+        "help": "Select whether you wear glasses or not.",
+        "is_optional": true
+      },
+      "hair": {
+        "label": "What is your hair length?",
+        "options": ["Short", "Medium", "Long"],
+        "help": "Select your hair length.",
+        "is_optional": true
+      },
+      "race": {
+        "label": "What is your race?",
+        "options": ["White", "Black", "Hispanic", "Asian", "Asian/American", "Middle Eastern"],
+        "help": "Select your race.",
+        "is_optional": true
       }
     },
     "number_input": {
@@ -36,13 +54,15 @@
         "step": 1,
         "max_value": 500,
         "help": "Enter your weight in pounds."
-      }
-    },
-    "selectbox": {
-      "glasses": {
-        "label": "Do you wear glasses?",
-        "options": ["Yes", "No"],
-        "help": "Select whether you wear glasses or not."
+      },
+      "age": {
+        "label": "Enter your age:",
+        "min_value": 2,
+        "value": 18,
+        "step": 1,
+        "max_value": 99,
+        "help": "Enter your age.",
+        "is_optional": true
       }
     },
     "headers": {

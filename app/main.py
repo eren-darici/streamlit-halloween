@@ -22,7 +22,7 @@ st.sidebar.header(options['headers']['specs'])
 medium, budget, selected_gender, selected_height, weight = show_costume_specs(options)
 
 # Show extras
-glasses = show_extras(options)
+glasses, hair_length, race = show_extras(options)
 
 # Button to generate costume
 if st.sidebar.button(options['button']['generate_costume']):
