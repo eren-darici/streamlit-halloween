@@ -12,3 +12,5 @@ class Costume(BaseModel):
     hair: Optional[str] = Field(None, description="Select your hair length.")
     weight: float
     age: Optional[int] = Field(None, description="Enter your age.")
+
+    props: List[str]
