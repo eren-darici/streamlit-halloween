@@ -41,7 +41,7 @@
       },
       "ethnicity": {
         "label": "What is your ethnicity?",
-        "options": ["White", "Black", "Hispanic", "Asian", "Asian/American", "Middle Eastern"],
+        "options": ["White", "Black/African-American", "Hispanic", "Asian", "Asian-American", "Middle Eastern"],
         "help": "Select your ethnicity.",
         "is_optional": true
       }
