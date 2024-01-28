@@ -7,11 +7,12 @@ class Costume(BaseModel):
     medium: str
     gender: List[str]
     budget: str
-    height: float
-    glasses: Optional[str] = Field(None, description="Select whether you wear glasses or not.")
-    hair: Optional[str] = Field(None, description="Select your hair length.")
+    height_feet: int
+    height_inches: int
+    glasses: Optional[str] = Field(description="Select whether you wear glasses or not. Yes if you are wearing, No if you are not.")
+    hair: Optional[str] = Field(description="Select your hair length.")
     ethnicity: Optional[str]
     weight: float
-    age: Optional[int] = Field(None, description="Enter your age.")
+    age: Optional[int] = Field(description="Enter your age. It should be an integer")
 
     props: List[str]
